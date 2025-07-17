@@ -73,16 +73,4 @@ Ou abra o projeto no **Visual Studio**, selecione `Android Emulator` e clique em
 └── Calendar.csproj     # Arquivo do projeto MAUI
 ```
 
----
-
-## 🔐 Publicação (opcional)
-
-Para publicar na Google Play, será necessário assinar o APK com um certificado (keystore). Posso te ajudar com esse processo se desejar.
-
----
-
-## 🧵 Contato
-
-Desenvolvido por **Mikaela Alves**  
-📧 seu-email@email.com  
-📍 Engenharia Eletrônica e de Computação — UFRJ
+--------------

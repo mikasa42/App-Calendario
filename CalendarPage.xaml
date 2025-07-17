@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="Calendar.CalendarPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:converters="clr-namespace:Calendar.Converters"
+    xmlns:viewmodels="clr-namespace:Calendar.ViewModels"
+    Title="CalendarPage">
+
+    <ContentPage.BindingContext>
+        <viewmodels:MonthViewModel />
+    </ContentPage.BindingContext>
+
+    <VerticalStackLayout BackgroundColor="WhiteSmoke" HorizontalOptions="Center">
+        <Label
+            x:Name="titleYear"
+            BackgroundColor="MediumVioletRed"
+            FontFamily="PoiretRegular"
+            FontSize="40"
+            HorizontalOptions="Fill"
+            HorizontalTextAlignment="Center"
+            Text="{Binding selectedYear}"
+            TextColor="White"
+            VerticalTextAlignment="Center" />
+
+        <HorizontalStackLayout HorizontalOptions="Center" Spacing="30">
+
+            <Button
+                Margin="0,10"
+                BackgroundColor="WhiteSmoke"
+                BorderColor="MediumVioletRed"
+                BorderWidth="1"
+                Command="{Binding PreviousMonthCommand}"
+                FontSize="30"
+                Text="&lt;&lt;"
+                TextColor="MediumVioletRed" />
+
+            <Label
+                x:Name="subtitleMonth"
+                Margin="10"
+                FontFamily="PoiretRegular"
+                FontSize="30"
+                HorizontalOptions="Start"
+                HorizontalTextAlignment="Center"
+                MinimumWidthRequest="150"
+                Text="{Binding selectedMonth}"
+                VerticalOptions="Center" />
+
+            <Button
+                Margin="0,10"
+                BackgroundColor="WhiteSmoke"
+                BorderColor="MediumVioletRed"
+                BorderWidth="1"
+                Command="{Binding NextMonthCommand}"
+                FontSize="30"
+                Text="&gt;&gt;"
+                TextColor="MediumVioletRed" />
+
+        </HorizontalStackLayout>
+
+        <!--  Linha com os dias da semana  -->
+        <HorizontalStackLayout
+            Margin="6,10,0,5"
+            HorizontalOptions="Center"
+            Spacing="8">
+            <Label
+                FontAttributes="Bold"
+                HorizontalTextAlignment="Center"
+                Text="D"
+                WidthRequest="48" />
+            <Label
+                FontAttributes="Bold"
+                HorizontalTextAlignment="Center"
+                Text="S"
+                WidthRequest="48" />
+            <Label
+                FontAttributes="Bold"
+                HorizontalTextAlignment="Center"
+                Text="T"
+                WidthRequest="48" />
+            <Label
+                FontAttributes="Bold"
+                HorizontalTextAlignment="Center"
+                Text="Q"
+                WidthRequest="48" />
+            <Label
+                FontAttributes="Bold"
+                HorizontalTextAlignment="Center"
+                Text="Q"
+                WidthRequest="48" />
+            <Label
+                FontAttributes="Bold"
+                HorizontalTextAlignment="Center"
+                Text="S"
+                WidthRequest="48" />
+            <Label
+                FontAttributes="Bold"
+                HorizontalTextAlignment="Center"
+                Text="S"
+                WidthRequest="48" />
+        </HorizontalStackLayout>
+
+        <CollectionView
+            ItemsLayout="VerticalGrid, 7"
+            ItemsSource="{Binding Days}"
+            SelectionMode="None"
+            WidthRequest="400">
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="viewmodels:DayItem">
+                    <Button
+                        Margin="2"
+                        BackgroundColor="{Binding BackgroundColor}"
+                        Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:MonthViewModel}}, Path=ToggleDayCommand}"
+                        CommandParameter="{Binding .}"
+                        CornerRadius="24"
+                        FontAttributes="Bold"
+                        FontSize="14"
+                        HeightRequest="48"
+                        HorizontalOptions="Center"
+                        IsEnabled="{Binding IsSpacer, Converter={StaticResource InverseBoolConverter}}"
+                        Text="{Binding DayText}"
+                        TextColor="Black"
+                        VerticalOptions="Center"
+                        WidthRequest="48" />
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+            <!--
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="viewmodels:DayItem">
+                    <Button
+                        Margin="2"
+                        BackgroundColor="{Binding BackgroundColor}"
+                        Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:MonthViewModel}}, Path=ToggleDayCommand}"
+                        CommandParameter="{Binding}"
+                        CornerRadius="22"
+                        FontAttributes="Bold"
+                        FontSize="15"
+                        HeightRequest="48"
+                        HorizontalOptions="Center"
+                        IsEnabled="{Binding IsPlaceholder, Converter={StaticResource InverseBoolConverter}}"
+                        Text="{Binding DayText}"
+                        TextColor="Black"
+                        VerticalOptions="Center"
+                        WidthRequest="48" />
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+            -->
+        </CollectionView>
+    </VerticalStackLayout>
+</ContentPage>
